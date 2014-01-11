@@ -5,7 +5,8 @@
 
 int main(void)
 {
-    printf("%lf\n", ranging());
+    ultrasonic_init();
+    printf("%lf\n", ultrasonic_ranging());
 
     return EXIT_SUCCESS;
 }
