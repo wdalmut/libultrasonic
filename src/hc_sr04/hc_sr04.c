@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <inttypes.h>
 
@@ -32,7 +33,6 @@ double hc_sr04_capture(void)
 
     // double read_distance
     {
-        int status = HIGH;
         while(HIGH != bcm2835_gpio_lev(PIN_ECHO_BACK) || hc_sr04_isTimeout(5)) {
             usleep(5);
         }
@@ -61,7 +61,7 @@ void hc_sr04_prepare(void)
 
 static uint8_t hc_sr04_isTimeout(uint16_t sleep_us)
 {
-    static spent = 0;
+    static uint32_t spent = 0;
 
     spent += sleep_us;
 
