@@ -4,7 +4,7 @@ CP=/bin/cp
 MKDIR=/bin/mkdir
 RM=/bin/rm
 
-CFLAGS=-g3 -Wall -lbcm2835
+CFLAGS=-g3 -Wall -lbcm2835 -lrt
 
 BUILD_DIR=../build
 
