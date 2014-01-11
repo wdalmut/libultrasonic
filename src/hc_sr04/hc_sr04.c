@@ -16,7 +16,7 @@
 static uint8_t hc_sr04_isTimeout(uint16_t);
 
 /**
- * capture and return time in ms
+ * capture and return time in us
  *
  * so rude... need kernel module...
  */
@@ -39,7 +39,7 @@ double hc_sr04_capture(void)
 
         while(LOW != bcm2835_gpio_lev(PIN_ECHO_BACK) || hc_sr04_isTimeout(100)) {
             usleep(100);
-            time += 0.1;
+            time += 100;
         }
 
     }
@@ -81,11 +81,11 @@ void hc_sr04_init(void)
 
 double hc_sr04_ranging(void)
 {
-    double time = hc_sr04_capture();
+    double time_us = hc_sr04_capture();
 
     double distance_m = 5;
-    if (time < 38) {
-        distance_m = time / 58 * 100;
+    if (time_us < 38000) {
+        distance_m = time_us / 58 / 100;
     }
 
     return distance_m;
